@@ -3,6 +3,7 @@ services:
   - type: web
     name: janjathi-shiksha-setu-mobile
     env: static
+    autoDeploy: true
     rootDir: apps/mobile
     buildCommand: npm install --include=dev && npx expo export -p web
     staticPublishPath: dist
@@ -15,6 +16,7 @@ services:
   - type: web
     name: janjathi-shiksha-setu-admin
     env: static
+    autoDeploy: true
     rootDir: apps/admin
     buildCommand: npm install --include=dev && npm run build
     staticPublishPath: dist
@@ -28,6 +30,7 @@ services:
     name: janjathi-shiksha-setu-api
     env: node
     plan: free
+    autoDeploy: true
     rootDir: services/api
     buildCommand: npm install --include=dev && npx prisma db push && npm run db:seed && npm run build
     startCommand: npm run start
