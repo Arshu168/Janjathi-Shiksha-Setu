@@ -1,0 +1,41 @@
+services:
+  # 1. Mobile Web Application (Expo React Native Web)
+  - type: web
+    name: janjathi-shiksha-setu-mobile
+    env: static
+    buildCommand: npm install && npx expo export -p web --workspace=apps/mobile
+    staticPublishPath: apps/mobile/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+  # 2. Admin Mission Control Portal
+  - type: web
+    name: janjathi-shiksha-setu-admin
+    env: static
+    buildCommand: npm install && npm run build --workspace=apps/admin
+    staticPublishPath: apps/admin/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+  # 3. Backend Fastify API Service
+  - type: web
+    name: janjathi-shiksha-setu-api
+    env: node
+    plan: free
+    buildCommand: npm install && npx prisma db push --schema=services/api/prisma/schema.prisma && npm run db:seed && npm run build:api
+    startCommand: npm run start --workspace=services/api
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        value: file:./dev.db
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
