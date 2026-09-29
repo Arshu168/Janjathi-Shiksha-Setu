@@ -3,7 +3,7 @@
 
 [![Prototype Status](https://img.shields.io/badge/Prototype-Functional-emerald.svg)]()
 [![Stack](https://img.shields.io/badge/Stack-Node%20%7C%20Fastify%20%7C%20React%20Native%20%7C%20Expo-blue.svg)]()
-[![Target](https://img.shields.io/badge/Audience-Scheduled%20Tribe%20(ST)%20Students-orange.svg)]()
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Arshu168/Janjathi-Shiksha-Setu)
 
 A full-stack, mobile-first unified scholarship management infrastructure designed for the Ministry of Tribal Affairs (MoTA), bringing five major scholarship and fellowship schemes into a single sovereign student experience.
 
