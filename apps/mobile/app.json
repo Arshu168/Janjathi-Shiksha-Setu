@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Janjathi Shiksha Setu",
+    "slug": "janjathi-shiksha-setu",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "janjathi",
+    "userInterfaceStyle": "light",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F9F7F4"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.jss.mobile",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#F9F7F4"
+      }
+    },
+    "plugins": [
+      "expo-router"
+    ]
+  }
+}
