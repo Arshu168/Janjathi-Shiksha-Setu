@@ -3,8 +3,9 @@ services:
   - type: web
     name: janjathi-shiksha-setu-mobile
     env: static
-    buildCommand: npm install && npx expo export -p web --workspace=apps/mobile
-    staticPublishPath: apps/mobile/dist
+    rootDir: apps/mobile
+    buildCommand: npm install --include=dev && npx expo export -p web
+    staticPublishPath: dist
     routes:
       - type: rewrite
         source: /*
@@ -14,8 +15,9 @@ services:
   - type: web
     name: janjathi-shiksha-setu-admin
     env: static
-    buildCommand: npm install && npm run build --workspace=apps/admin
-    staticPublishPath: apps/admin/dist
+    rootDir: apps/admin
+    buildCommand: npm install --include=dev && npm run build
+    staticPublishPath: dist
     routes:
       - type: rewrite
         source: /*
@@ -26,8 +28,9 @@ services:
     name: janjathi-shiksha-setu-api
     env: node
     plan: free
-    buildCommand: npm install && npx prisma db push --schema=services/api/prisma/schema.prisma && npm run db:seed && npm run build:api
-    startCommand: npm run start --workspace=services/api
+    rootDir: services/api
+    buildCommand: npm install --include=dev && npx prisma db push && npm run db:seed && npm run build
+    startCommand: npm run start
     envVars:
       - key: NODE_ENV
         value: production
