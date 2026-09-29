@@ -32,6 +32,30 @@ export default function ScholarshipsScreen() {
         </View>
       </TouchableOpacity>
 
+      {/* Official MoTA National Reach & Transparency Card */}
+      <View style={styles.motaStatsCard}>
+        <View style={styles.motaStatsHeader}>
+          <Text style={styles.motaStatsBadge}>OFFICIAL MOTA DATA (2013-26)</Text>
+          <Text style={styles.motaStatsTitle}>National ST Education Impact</Text>
+        </View>
+        <View style={styles.motaStatsGrid}>
+          <View style={styles.motaStatItem}>
+            <Text style={styles.motaStatVal}>₹27,872 Cr</Text>
+            <Text style={styles.motaStatLbl}>Central Funds Released</Text>
+          </View>
+          <View style={styles.motaStatDivider} />
+          <View style={styles.motaStatItem}>
+            <Text style={styles.motaStatVal}>4.17 Cr+</Text>
+            <Text style={styles.motaStatLbl}>ST Students Benefited</Text>
+          </View>
+          <View style={styles.motaStatDivider} />
+          <View style={styles.motaStatItem}>
+            <Text style={styles.motaStatVal}>33</Text>
+            <Text style={styles.motaStatLbl}>States & UTs Covered</Text>
+          </View>
+        </View>
+      </View>
+
       <View style={styles.list}>
         {schemes.map((scheme) => (
           <View key={scheme.id} style={styles.card}>
@@ -235,5 +259,60 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '700',
     color: colors.primary,
+  },
+  motaStatsCard: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 14,
+    padding: 16,
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
+    elevation: 2,
+  },
+  motaStatsHeader: {
+    marginBottom: 12,
+  },
+  motaStatsBadge: {
+    fontSize: 9,
+    fontWeight: '800',
+    color: colors.primary,
+    letterSpacing: 0.5,
+  },
+  motaStatsTitle: {
+    fontSize: 13,
+    fontWeight: '800',
+    color: colors.charcoal,
+    marginTop: 2,
+  },
+  motaStatsGrid: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: 6,
+  },
+  motaStatItem: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  motaStatDivider: {
+    width: 1,
+    height: 28,
+    backgroundColor: colors.border,
+  },
+  motaStatVal: {
+    fontSize: 14,
+    fontWeight: '800',
+    color: colors.charcoal,
+  },
+  motaStatLbl: {
+    fontSize: 9,
+    fontWeight: '600',
+    color: colors.textSecondary,
+    marginTop: 2,
+    textAlign: 'center',
   },
 });

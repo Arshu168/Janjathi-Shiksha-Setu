@@ -317,3 +317,21 @@ model CoverageGapRecord {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
+
+model MinistryDisbursementStat {
+  id             String   @id @default(uuid())
+  schemeCode     String   // PRE_MATRIC | POST_MATRIC
+  schemeName     String
+  state          String
+  financialYear  String   // e.g. "2013-14" ... "2025-26"
+  fundReleasedCr Float
+  fundUtilizedCr Float
+  beneficiaries  Int
+  isTotalRow     Boolean  @default(false)
+  isEstimated    Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  @@index([schemeCode, financialYear])
+  @@index([state])
+}
+

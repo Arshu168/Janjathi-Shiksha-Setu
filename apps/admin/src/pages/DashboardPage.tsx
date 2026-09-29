@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { 
   Users, 
@@ -66,6 +67,29 @@ export const DashboardPage: React.FC = () => {
             <span className="text-sm font-bold text-amber-700">{stats?.coverageGap?.pendingOutreach || 8} Identified Unreached</span>
           </div>
         </div>
+      </div>
+
+      {/* MoTA Official Dataset Highlight Banner */}
+      <div className="bg-gradient-to-r from-[#1A5C38] to-[#2A7C6F] rounded-xl p-5 text-white shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/20 text-white">
+              Official Ministry Dataset
+            </span>
+            <span className="text-xs text-white/80">Annexure-I Data (2013-14 to 2025-26)</span>
+          </div>
+          <h2 className="text-lg font-bold mt-1 text-white">National Scholarship Fund & Beneficiary Registry</h2>
+          <p className="text-xs text-white/85 mt-0.5 max-w-2xl">
+            Over ₹27,872+ Crores disbursed to 4.17+ Crore ST students across 33 States and Union Territories.
+          </p>
+        </div>
+        <Link
+          to="/analytics"
+          className="flex items-center gap-2 px-4 py-2.5 bg-white text-primary text-xs font-bold rounded-lg shadow-sm hover:bg-[#F9F7F4] transition-colors self-start md:self-auto shrink-0"
+        >
+          <span>Explore State Analytics</span>
+          <ArrowUpRight className="w-4 h-4 text-primary" />
+        </Link>
       </div>
 
       {/* KPI Cards */}

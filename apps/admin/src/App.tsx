@@ -7,6 +7,7 @@ import { DashboardPage } from './pages/DashboardPage';
 import { ApplicationsPage } from './pages/ApplicationsPage';
 import { CoverageGapPage } from './pages/CoverageGapPage';
 import { VerificationQueuePage } from './pages/VerificationQueuePage';
+import { MotaAnalyticsPage } from './pages/MotaAnalyticsPage';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, token, isLoading } = useAuth();
@@ -42,7 +43,8 @@ export const App: React.FC = () => {
             <Route path="verification" element={<VerificationQueuePage />} />
             <Route path="students" element={<DashboardPage />} />
             <Route path="payments" element={<DashboardPage />} />
-            <Route path="analytics" element={<DashboardPage />} />
+            <Route path="analytics" element={<MotaAnalyticsPage />} />
+            <Route path="mota-data" element={<MotaAnalyticsPage />} />
             <Route path="audit-logs" element={<DashboardPage />} />
           </Route>
         </Routes>

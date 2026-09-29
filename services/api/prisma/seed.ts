@@ -1,5 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
+import fs from 'fs';
+import path from 'path';
 
 const prisma = new PrismaClient();
 
@@ -568,7 +570,36 @@ async function main() {
     });
   }
 
-  console.log('✅ Database seeded successfully with realistic ST scholarship data!');
+  // Seed official MoTA dataset
+  const motaDataPath = path.join(__dirname, '../src/data/motaDisbursementData.json');
+  if (fs.existsSync(motaDataPath)) {
+    const raw = fs.readFileSync(motaDataPath, 'utf-8');
+    const parsed = JSON.parse(raw);
+    console.log(`📊 Ingesting ${parsed.records.length} official MoTA disbursement records...`);
+    
+    await prisma.ministryDisbursementStat.deleteMany({});
+    
+    const chunkSize = 100;
+    for (let i = 0; i < parsed.records.length; i += chunkSize) {
+      const chunk = parsed.records.slice(i, i + chunkSize);
+      await prisma.ministryDisbursementStat.createMany({
+        data: chunk.map((r: any) => ({
+          schemeCode: r.schemeCode,
+          schemeName: r.schemeName,
+          state: r.state,
+          financialYear: r.financialYear,
+          fundReleasedCr: r.fundReleasedCr,
+          fundUtilizedCr: r.fundUtilizedCr,
+          beneficiaries: r.beneficiaries,
+          isTotalRow: r.isTotalRow,
+          isEstimated: r.isEstimated,
+        })),
+      });
+    }
+    console.log(`✅ Ingested ${parsed.records.length} MoTA records into database.`);
+  }
+
+  console.log('✅ Database seeded successfully with realistic ST scholarship data and official MoTA dataset!');
 }
 
 main()

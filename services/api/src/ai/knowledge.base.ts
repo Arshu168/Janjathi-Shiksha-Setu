@@ -161,3 +161,35 @@ export function getAllSchemes() {
     ...info,
   }));
 }
+
+export const motaNationalStats = {
+  source: 'Ministry of Tribal Affairs, Government of India (Annexure-I)',
+  timePeriod: '2013-14 to 2025-26',
+  totalFundsReleasedCr: 27872.9,
+  totalFundsUtilizedCr: 24196.1,
+  totalBeneficiaries: 41749275,
+  overallUtilizationRate: 86.8,
+  preMatric: {
+    releasedCr: 3450.4,
+    utilizedCr: 3279.3,
+    beneficiaries: 14885863,
+  },
+  postMatric: {
+    releasedCr: 24422.5,
+    utilizedCr: 20916.8,
+    beneficiaries: 26863412,
+  },
+  topStates: [
+    { state: 'Madhya Pradesh', beneficiaries: 7484214, fundsCr: 2839.4 },
+    { state: 'Gujarat', beneficiaries: 4804253, fundsCr: 3800.8 },
+    { state: 'Odisha', beneficiaries: 4663886, fundsCr: 2748.1 },
+    { state: 'Rajasthan', beneficiaries: 4105093, fundsCr: 2365.7 },
+    { state: 'Chhattisgarh', beneficiaries: 2956087, fundsCr: 987.2 },
+    { state: 'Karnataka', beneficiaries: 2542123, fundsCr: 1384.8 },
+    { state: 'Jharkhand', beneficiaries: 2327593, fundsCr: 869.5 },
+  ],
+};
+
+export function getMotaNationalStats() {
+  return motaNationalStats;
+}

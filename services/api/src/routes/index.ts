@@ -10,6 +10,7 @@ import { notificationRoutes } from './notifications.routes';
 import { jagoRoutes } from './jago.routes';
 import { adminRoutes } from './admin.routes';
 import { integrationRoutes } from './integrations.routes';
+import { analyticsRoutes } from './analytics.routes';
 
 export async function registerRoutes(app: FastifyInstance) {
   await app.register(authRoutes, { prefix: '/auth' });
@@ -23,4 +24,5 @@ export async function registerRoutes(app: FastifyInstance) {
   await app.register(jagoRoutes, { prefix: '/jago' });
   await app.register(adminRoutes, { prefix: '/admin' });
   await app.register(integrationRoutes, { prefix: '/integrations' });
+  await app.register(analyticsRoutes, { prefix: '/analytics' });
 }
