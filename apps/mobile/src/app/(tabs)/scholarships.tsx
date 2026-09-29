@@ -93,7 +93,8 @@ export default function ScholarshipsScreen() {
 
               <TouchableOpacity 
                 style={styles.detailsBtn}
-                onPress={() => router.push({ pathname: '/scholarships/[id]', params: { id: scheme.id } })}
+                onPress={() => router.push(`/scholarships/${scheme.id}` as any)}
+                activeOpacity={0.8}
               >
                 <Text style={styles.detailsBtnText}>Scheme Details</Text>
                 <ArrowRight size={14} color={colors.primary} />
