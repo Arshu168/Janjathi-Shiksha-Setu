@@ -3,8 +3,11 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Linking } from 'r
 import { colors } from '@/constants/colors';
 import { router } from 'expo-router';
 import { ArrowLeft, Phone, Mail, Globe, MapPin, ShieldCheck, ExternalLink } from 'lucide-react-native';
+import { useLanguageStore } from '@/store/language.store';
 
 export default function HelpScreen() {
+  const { t } = useLanguageStore();
+
   const helplines = [
     { title: 'National ST Scholarship Helpdesk', value: '1800-11-2001', type: 'phone', desc: 'Toll-free national query resolution (9:30 AM - 5:30 PM)' },
     { title: 'DBT Payment Disbursal Cell', value: '011-2338-8427', type: 'phone', desc: 'Direct Benefit Transfer & Aadhaar linking queries' },
@@ -26,8 +29,8 @@ export default function HelpScreen() {
           <ArrowLeft size={20} color={colors.charcoal} />
         </TouchableOpacity>
         <View>
-          <Text style={styles.headerTitle}>Helpline & Support</Text>
-          <Text style={styles.headerSub}>Ministry of Tribal Affairs grievance channels</Text>
+          <Text style={styles.headerTitle}>{t('prof.helpline', 'Helpline & Support')}</Text>
+          <Text style={styles.headerSub}>{t('prof.helpline_sub', 'Ministry of Tribal Affairs grievance channels')}</Text>
         </View>
       </View>
 

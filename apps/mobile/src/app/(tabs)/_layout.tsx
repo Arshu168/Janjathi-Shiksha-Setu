@@ -3,8 +3,11 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Tabs, router } from 'expo-router';
 import { colors } from '@/constants/colors';
 import { Home, BookOpen, FileText, CreditCard, User, Bot } from 'lucide-react-native';
+import { useLanguageStore } from '@/store/language.store';
 
 export default function TabLayout() {
+  const { t } = useLanguageStore();
+
   return (
     <View style={{ flex: 1 }}>
       <Tabs
@@ -19,35 +22,35 @@ export default function TabLayout() {
         <Tabs.Screen
           name="index"
           options={{
-            title: 'Home',
+            title: t('nav.home', 'Home'),
             tabBarIcon: ({ color, size }) => <Home size={20} color={color} />,
           }}
         />
         <Tabs.Screen
           name="scholarships"
           options={{
-            title: 'Scholarships',
+            title: t('nav.scholarships', 'Scholarships'),
             tabBarIcon: ({ color, size }) => <BookOpen size={20} color={color} />,
           }}
         />
         <Tabs.Screen
           name="applications"
           options={{
-            title: 'Applications',
+            title: t('nav.applications', 'Applications'),
             tabBarIcon: ({ color, size }) => <FileText size={20} color={color} />,
           }}
         />
         <Tabs.Screen
           name="payments"
           options={{
-            title: 'Payments',
+            title: t('home.payment_history', 'Payments'),
             tabBarIcon: ({ color, size }) => <CreditCard size={20} color={color} />,
           }}
         />
         <Tabs.Screen
           name="profile"
           options={{
-            title: 'Profile',
+            title: t('nav.profile', 'Profile'),
             tabBarIcon: ({ color, size }) => <User size={20} color={color} />,
           }}
         />

@@ -13,29 +13,42 @@ import {
   Sparkles, 
   FileCheck2,
   ChevronRight,
-  ShieldCheck
+  ShieldCheck,
+  Globe
 } from 'lucide-react-native';
 import { router } from 'expo-router';
+import { useLanguageStore } from '@/store/language.store';
 
 export default function HomeScreen() {
   const student = demoStudentData;
+  const { language, t } = useLanguageStore();
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
       {/* Top Header */}
       <View style={styles.header}>
         <Logo size="md" />
-        <TouchableOpacity style={styles.notifBtn} onPress={() => router.push('/notifications')}>
-          <Bell size={20} color={colors.charcoal} />
-          <View style={styles.notifBadge} />
-        </TouchableOpacity>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+          <TouchableOpacity 
+            style={styles.langBadgeBtn} 
+            onPress={() => router.push('/settings/language')}
+            activeOpacity={0.8}
+          >
+            <Globe size={14} color={colors.primary} />
+            <Text style={styles.langBadgeText}>{language.toUpperCase()}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.notifBtn} onPress={() => router.push('/notifications')}>
+            <Bell size={20} color={colors.charcoal} />
+            <View style={styles.notifBadge} />
+          </TouchableOpacity>
+        </View>
       </View>
 
       {/* Greeting & Completion Card */}
       <View style={styles.greetingCard}>
         <View style={styles.greetingTop}>
           <View>
-            <Text style={styles.greetingText}>Good evening,</Text>
+            <Text style={styles.greetingText}>{t('home.welcome', 'Good evening,')}</Text>
             <Text style={styles.studentName}>{student.fullName}</Text>
             <View style={styles.studentTag}>
               <Text style={styles.studentTagText}>{student.role} • {student.district}</Text>
@@ -50,7 +63,7 @@ export default function HomeScreen() {
         {/* Profile Completion Bar */}
         <View style={styles.progressContainer}>
           <View style={styles.progressLabelRow}>
-            <Text style={styles.progressLabel}>One Profile Completion</Text>
+            <Text style={styles.progressLabel}>{t('home.readiness_title', 'One Profile Completion')}</Text>
             <Text style={styles.progressValue}>{student.profileCompletion}%</Text>
           </View>
           <View style={styles.progressBarBg}>
@@ -72,16 +85,16 @@ export default function HomeScreen() {
 
       {/* Signature Horizontal Journey Motif */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>YOUR SCHOLARSHIP PATHWAY</Text>
+        <Text style={styles.sectionTitle}>{t('sch.title', 'YOUR SCHOLARSHIP PATHWAY')}</Text>
         <JourneyProgress currentStage="VERIFICATION" />
       </View>
 
       {/* Active Application Card */}
       <View style={styles.section}>
         <View style={styles.sectionHeaderRow}>
-          <Text style={styles.sectionTitle}>ACTIVE APPLICATION</Text>
+          <Text style={styles.sectionTitle}>{t('app.title', 'ACTIVE APPLICATION')}</Text>
           <TouchableOpacity onPress={() => router.push('/applications')}>
-            <Text style={styles.seeAllText}>View all</Text>
+            <Text style={styles.seeAllText}>{t('home.see_all', 'View all')}</Text>
           </TouchableOpacity>
         </View>
 
@@ -93,7 +106,7 @@ export default function HomeScreen() {
             </View>
             <View style={styles.statusBadge}>
               <Clock size={12} color="#1D4ED8" />
-              <Text style={styles.statusBadgeText}>Under Dept Verification</Text>
+              <Text style={styles.statusBadgeText}>{t('app.under_review', 'Under Dept Verification')}</Text>
             </View>
           </View>
 
@@ -105,7 +118,7 @@ export default function HomeScreen() {
               style={styles.trackBtn} 
               onPress={() => router.push('/applications/app-post-matric-1')}
             >
-              <Text style={styles.trackBtnText}>Track Details</Text>
+              <Text style={styles.trackBtnText}>{t('app.view_details', 'Track Details')}</Text>
               <ArrowRight size={14} color={colors.primary} />
             </TouchableOpacity>
           </View>
@@ -135,7 +148,7 @@ export default function HomeScreen() {
 
       {/* Opportunity / Scholarship Gap Alert */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>SCHOLARSHIP OPPORTUNITY</Text>
+        <Text style={styles.sectionTitle}>{t('home.eligible_schemes', 'SCHOLARSHIP OPPORTUNITY')}</Text>
         <View style={[styles.card, styles.opportunityCard]}>
           <View style={styles.alertIconRow}>
             <Sparkles size={20} color={colors.secondary} />
@@ -148,7 +161,7 @@ export default function HomeScreen() {
             style={styles.opportunityBtn}
             onPress={() => router.push('/eligibility')}
           >
-            <Text style={styles.opportunityBtnText}>Check Preliminary Eligibility</Text>
+            <Text style={styles.opportunityBtnText}>{t('home.check_eligibility', 'Check Preliminary Eligibility')}</Text>
             <ArrowRight size={13} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
@@ -157,9 +170,9 @@ export default function HomeScreen() {
       {/* Recent Payment / DBT */}
       <View style={[styles.section, { marginBottom: 30 }]}>
         <View style={styles.sectionHeaderRow}>
-          <Text style={styles.sectionTitle}>RECENT DBT TRANSACTION</Text>
+          <Text style={styles.sectionTitle}>{t('home.recent_dbt', 'RECENT DBT TRANSACTION')}</Text>
           <TouchableOpacity onPress={() => router.push('/payments')}>
-            <Text style={styles.seeAllText}>Payment history</Text>
+            <Text style={styles.seeAllText}>{t('home.payment_history', 'Payment history')}</Text>
           </TouchableOpacity>
         </View>
 
@@ -172,7 +185,7 @@ export default function HomeScreen() {
             </View>
             <View style={styles.paidBadge}>
               <CheckCircle2 size={13} color={colors.primary} />
-              <Text style={styles.paidBadgeText}>CREDITED</Text>
+              <Text style={styles.paidBadgeText}>{t('home.credited', 'CREDITED')}</Text>
             </View>
           </View>
         </View>
@@ -196,6 +209,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 16,
+  },
+  langBadgeBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    backgroundColor: '#E8F5E9',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#C8E6D3',
+  },
+  langBadgeText: {
+    fontSize: 11,
+    fontWeight: '800',
+    color: colors.primary,
   },
   notifBtn: {
     width: 38,

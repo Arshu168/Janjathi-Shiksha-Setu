@@ -4,15 +4,17 @@ import { colors } from '@/constants/colors';
 import { demoStudentData } from '@/constants/demoData';
 import { router } from 'expo-router';
 import { Clock, CheckCircle2, ChevronRight, FileText } from 'lucide-react-native';
+import { useLanguageStore } from '@/store/language.store';
 
 export default function ApplicationsScreen() {
   const [filter, setFilter] = useState('ALL');
+  const { t } = useLanguageStore();
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
-        <Text style={styles.title}>My Applications</Text>
-        <Text style={styles.subtitle}>Consolidated status tracker across all 5 scholarship rails</Text>
+        <Text style={styles.title}>{t('app.title', 'My Applications')}</Text>
+        <Text style={styles.subtitle}>{t('app.subtitle', 'Consolidated status tracker across all 5 scholarship rails')}</Text>
       </View>
 
       {/* Tabs */}

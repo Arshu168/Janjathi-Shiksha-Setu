@@ -4,15 +4,17 @@ import { colors } from '@/constants/colors';
 import { demoStudentData } from '@/constants/demoData';
 import { router } from 'expo-router';
 import { ArrowRight, Sparkles, CheckCircle2, Clock, AlertTriangle } from 'lucide-react-native';
+import { useLanguageStore } from '@/store/language.store';
 
 export default function ScholarshipsScreen() {
   const schemes = demoStudentData.schemes;
+  const { t } = useLanguageStore();
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
-        <Text style={styles.title}>Ministry Schemes</Text>
-        <Text style={styles.subtitle}>5 unified Ministry of Tribal Affairs scholarships & fellowships</Text>
+        <Text style={styles.title}>{t('sch.title', 'Ministry Schemes')}</Text>
+        <Text style={styles.subtitle}>{t('sch.subtitle', '5 unified Ministry of Tribal Affairs scholarships & fellowships')}</Text>
       </View>
 
       <TouchableOpacity 
@@ -22,12 +24,12 @@ export default function ScholarshipsScreen() {
         <View style={styles.checkerIconRow}>
           <Sparkles size={20} color="#FFFFFF" />
           <View style={{ flex: 1 }}>
-            <Text style={styles.checkerTitle}>Find Scholarships For Me</Text>
-            <Text style={styles.checkerSubtitle}>Answer 4 simple questions for rule-based preliminary eligibility</Text>
+            <Text style={styles.checkerTitle}>{t('home.qa_eligibility', 'Find Scholarships For Me')}</Text>
+            <Text style={styles.checkerSubtitle}>{t('home.check_eligibility', 'Answer simple questions for rule-based preliminary eligibility')}</Text>
           </View>
         </View>
         <View style={styles.checkerBtn}>
-          <Text style={styles.checkerBtnText}>Run Checker</Text>
+          <Text style={styles.checkerBtnText}>{t('sch.apply_now', 'Run Checker')}</Text>
           <ArrowRight size={14} color={colors.primary} />
         </View>
       </TouchableOpacity>
@@ -36,7 +38,7 @@ export default function ScholarshipsScreen() {
       <View style={styles.motaStatsCard}>
         <View style={styles.motaStatsHeader}>
           <Text style={styles.motaStatsBadge}>OFFICIAL MOTA DATA (2013-26)</Text>
-          <Text style={styles.motaStatsTitle}>National ST Education Impact</Text>
+          <Text style={styles.motaStatsTitle}>{t('sch.disbursal_stat', 'National ST Education Impact')}</Text>
         </View>
         <View style={styles.motaStatsGrid}>
           <View style={styles.motaStatItem}>

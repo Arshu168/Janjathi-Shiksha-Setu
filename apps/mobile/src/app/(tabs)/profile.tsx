@@ -15,9 +15,26 @@ import {
   ChevronRight,
   Globe
 } from 'lucide-react-native';
+import { useLanguageStore } from '@/store/language.store';
+
+const LANG_DISPLAY_NAMES: Record<string, string> = {
+  en: 'English (Official)',
+  hi: 'हिन्दी (Hindi)',
+  te: 'తెలుగు (Telugu)',
+  ta: 'தமிழ் (Tamil)',
+  bn: 'বাংলা (Bengali / Santhali)',
+  or: 'ଓଡ଼ିଆ (Odia)',
+  mr: 'मराठी (Marathi)',
+  gu: 'ગુજરાતી (Gujarati)',
+  gon: 'गोंडी (Gondi / Koya)',
+  sat: 'ᱚᱞ ᱪᱤᱠᱤ (Santali Ol Chiki)',
+  lus: 'Mizo ṭawng (Mizo)',
+  kha: 'Ka Ktien Khasi (Khasi)',
+};
 
 export default function ProfileScreen() {
   const p = demoStudentData;
+  const { language, t } = useLanguageStore();
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
@@ -31,7 +48,7 @@ export default function ProfileScreen() {
           <Text style={styles.roleText}>{p.role} • {p.district}, {p.state}</Text>
           <View style={styles.verifiedRow}>
             <ShieldCheck size={12} color={colors.primary} />
-            <Text style={styles.verifiedText}>Aadhaar Demographic Verified (XXXX 4821)</Text>
+            <Text style={styles.verifiedText}>{t('prof.st_verified', 'ST Verified')} • (XXXX 4821)</Text>
           </View>
         </View>
       </View>
@@ -49,13 +66,13 @@ export default function ProfileScreen() {
 
       {/* Unique Feature Links */}
       <View style={styles.menuSection}>
-        <Text style={styles.menuSectionTitle}>PLATFORM CAPABILITIES</Text>
+        <Text style={styles.menuSectionTitle}>{t('prof.sec_apps_docs', 'PLATFORM CAPABILITIES')}</Text>
 
         <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/documents')}>
           <FileText size={18} color={colors.primary} />
           <View style={{ flex: 1 }}>
-            <Text style={styles.menuItemText}>My Document Wallet</Text>
-            <Text style={styles.menuItemSub}>5 Verified Reusable Documents</Text>
+            <Text style={styles.menuItemText}>{t('prof.doc_locker', 'My Document Wallet')}</Text>
+            <Text style={styles.menuItemSub}>{t('prof.doc_locker_sub', '5 Verified Reusable Documents')}</Text>
           </View>
           <ChevronRight size={16} color={colors.textSecondary} />
         </TouchableOpacity>
@@ -63,8 +80,8 @@ export default function ProfileScreen() {
         <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/family')}>
           <Users size={18} color={colors.secondary} />
           <View style={{ flex: 1 }}>
-            <Text style={styles.menuItemText}>Family Scholarship Overview</Text>
-            <Text style={styles.menuItemSub}>Sibling & Household Entitlements</Text>
+            <Text style={styles.menuItemText}>{t('prof.family', 'Family Scholarship Overview')}</Text>
+            <Text style={styles.menuItemSub}>{t('prof.family_sub', 'Sibling & Household Entitlements')}</Text>
           </View>
           <ChevronRight size={16} color={colors.textSecondary} />
         </TouchableOpacity>
@@ -72,8 +89,8 @@ export default function ProfileScreen() {
         <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/calendar')}>
           <Calendar size={18} color={colors.accent} />
           <View style={{ flex: 1 }}>
-            <Text style={styles.menuItemText}>Personalized Scholarship Calendar</Text>
-            <Text style={styles.menuItemSub}>Document Renewals & Deadlines</Text>
+            <Text style={styles.menuItemText}>{t('prof.calendar', 'Personalized Scholarship Calendar')}</Text>
+            <Text style={styles.menuItemSub}>{t('prof.calendar_sub', 'Document Renewals & Deadlines')}</Text>
           </View>
           <ChevronRight size={16} color={colors.textSecondary} />
         </TouchableOpacity>
@@ -81,8 +98,8 @@ export default function ProfileScreen() {
         <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/readiness')}>
           <ShieldCheck size={18} color={colors.primary} />
           <View style={{ flex: 1 }}>
-            <Text style={styles.menuItemText}>Application Readiness Score</Text>
-            <Text style={styles.menuItemSub}>Diagnostic: 88% Prepared</Text>
+            <Text style={styles.menuItemText}>{t('prof.readiness', 'Application Readiness Score')}</Text>
+            <Text style={styles.menuItemSub}>{t('prof.readiness_sub', 'Diagnostic: 88% Prepared')}</Text>
           </View>
           <ChevronRight size={16} color={colors.textSecondary} />
         </TouchableOpacity>
@@ -90,13 +107,13 @@ export default function ProfileScreen() {
 
       {/* General Settings */}
       <View style={styles.menuSection}>
-        <Text style={styles.menuSectionTitle}>PREFERENCES & SUPPORT</Text>
+        <Text style={styles.menuSectionTitle}>{t('prof.sec_pref', 'PREFERENCES & SUPPORT')}</Text>
 
         <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/settings/language')}>
           <Globe size={18} color={colors.charcoal} />
           <View style={{ flex: 1 }}>
-            <Text style={styles.menuItemText}>Multilingual Preferences</Text>
-            <Text style={styles.menuItemSub}>English (English, हिन्दी, தமிழ்)</Text>
+            <Text style={styles.menuItemText}>{t('prof.language', 'Multilingual Preferences')}</Text>
+            <Text style={styles.menuItemSub}>{LANG_DISPLAY_NAMES[language] || 'English'}</Text>
           </View>
           <ChevronRight size={16} color={colors.textSecondary} />
         </TouchableOpacity>
@@ -104,8 +121,8 @@ export default function ProfileScreen() {
         <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/help')}>
           <HelpCircle size={18} color={colors.charcoal} />
           <View style={{ flex: 1 }}>
-            <Text style={styles.menuItemText}>Helpline & Official Information</Text>
-            <Text style={styles.menuItemSub}>Ministry of Tribal Affairs Contacts</Text>
+            <Text style={styles.menuItemText}>{t('prof.helpline', 'Helpline & Official Information')}</Text>
+            <Text style={styles.menuItemSub}>{t('prof.helpline_sub', 'Ministry of Tribal Affairs Contacts')}</Text>
           </View>
           <ChevronRight size={16} color={colors.textSecondary} />
         </TouchableOpacity>
@@ -116,7 +133,7 @@ export default function ProfileScreen() {
         >
           <LogOut size={18} color="#DC2626" />
           <View style={{ flex: 1 }}>
-            <Text style={[styles.menuItemText, { color: '#DC2626' }]}>Sign Out</Text>
+            <Text style={[styles.menuItemText, { color: '#DC2626' }]}>{t('prof.sign_out', 'Sign Out')}</Text>
           </View>
         </TouchableOpacity>
       </View>
